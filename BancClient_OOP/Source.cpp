@@ -1188,8 +1188,7 @@ int main() {
 		if (!ClsLoginScreen::LoginScreen())break;
 	}
 	
-
-	//hello baby
+	
 	system("pause>0");
 	
 

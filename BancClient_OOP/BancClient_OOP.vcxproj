@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClsCruencesList.cpp" />
     <ClCompile Include="ClsMainMenu.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -136,6 +137,8 @@
     <ClInclude Include="ClsBankClient.h" />
     <ClInclude Include="ClsClearClientsScreen.h" />
     <ClInclude Include="ClsClientsListScreen.h" />
+    <ClInclude Include="ClsCurrenciesList.h" />
+    <ClInclude Include="ClsCurrenciesScreen.h" />
     <ClInclude Include="ClsDate.h" />
     <ClInclude Include="ClsDeleteClientScreen.h" />
     <ClInclude Include="ClsDeleteUserScreen.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="ClsLoginRegisterData.h" />
     <ClInclude Include="ClsSearchByUsernameScreen.h" />
     <ClInclude Include="ClsTransfersList.h" />
+    <ClInclude Include="ClsCurrency.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

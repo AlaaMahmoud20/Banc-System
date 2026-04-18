@@ -4,10 +4,9 @@
 #include "ClsUtile.h"
 #include"ClsBankClient.h"
 #include"ClsInputValidation.h"
-//#include"ClsPerson.h"
-//#include"ClsScreen.h"
+
 #include"ClsPerson.h"
-//#include<iomanip>
+
 class ClsUser:public clsPerson
 {
 
@@ -348,8 +347,9 @@ public:
 			find_client = 1 << 4,
 			transaction_menu = 1 << 5,
 			mange_users = 1 << 6,
-			clear_all_Client = 1 << 7, 
-			logout = 1 << 8
+			clear_all_Client = 1 << 7,
+			currency_menu = 1 << 8,
+			logout = 1 << 9
 
 
 		};

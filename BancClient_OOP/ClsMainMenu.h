@@ -12,6 +12,7 @@
 #include"ClsTransactionMenuScreen.h"
 #include"ClsMangeUsersMenuScreen.h"
 #include"ClsClearClientsScreen.h"
+#include"ClsCurrenciesScreen.h"
 //class ClsLoginScreen;
 
 using namespace std;
@@ -24,7 +25,7 @@ private:
     enum enMainMenueOptions {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7,  eClearClients = 8 , eLogout = 9
+        eManageUsers = 7, eCurrency = 8, eClearClients = 9,eLogout = 10
     };
     static int _ReadMainMenueOption()
     {
@@ -69,6 +70,10 @@ private:
     static void _ShowClearClientsScreen()
     {
         ClsClearClientsScreen::ClearClientScreen();
+    }
+    static void _ShowCurrencyScreen()
+    {
+        ClsCurrenciesScreen::ShowCurrencyMenue();
     }
     //static void _ShowLoginScreen();
 
@@ -221,6 +226,28 @@ private:
 
              break;
         }
+        case enMainMenueOptions::eCurrency:
+        {
+
+            if (CurrentUser._HasPermission(ClsUser::enPermissons::currency_menu))
+            {
+
+                system("cls");
+                _ShowCurrencyScreen();
+                _GoBackToMainMenue();
+
+            }
+            else
+            {
+                system("cls");
+                AccessDeniedMessage();
+                _GoBackToMainMenue();
+
+            }
+
+            break;
+        }
+
 
         case enMainMenueOptions::eClearClients :
         {
@@ -293,15 +320,15 @@ public:
             
             CurrentUser._HasPermission(ClsUser::enPermissons::show_clients_lilst) ?
                 cout << setw(37) << left << "" << "\t[1] Clients List.\n" :
-                cout << setw(37) << left << "" << "\t[1] Clients List.                (X)\n";
-           
-
-            
-
-             CurrentUser._HasPermission(ClsUser::enPermissons::add_client)?
-                 cout << setw(37) << left << "" << "\t[2] Add Client.\n" :
+                cout << setw(37) << left << "" << "\t[1] Clients List.                     (X)\n";
+                                                                                          
+                                                                                          
+                                                                                          
+                                                                                          
+             CurrentUser._HasPermission(ClsUser::enPermissons::add_client)?               
+                 cout << setw(37) << left << "" << "\t[2] Add Client.\n" :                
                  cout << setw(37) << left << "" << "\t[2] Add Client.                      (X)\n";
-           
+                                                                                          
 
              CurrentUser._HasPermission(ClsUser::enPermissons::delete_client) ?
                  cout << setw(37) << left << "" << "\t[3] Delete Client.\n" :
@@ -324,27 +351,34 @@ public:
 
             CurrentUser._HasPermission(ClsUser::enPermissons::transaction_menu)?
                 cout << setw(37) << left << "" << "\t[6] Transactions.\n":
-                cout << setw(37) << left << "" << "\t[6] Transactions.                    (X)\n";
+                cout << setw(37) << left << "" << "\t[6] Transactions.                     (X)\n";
              
 
             CurrentUser._HasPermission(ClsUser::enPermissons::mange_users)?
                 cout << setw(37) << left << "" << "\t[7] Manage Users.\n":
-                cout << setw(37) << left << "" << "\t[7] Manage Users.                    (X)\n";
+                cout << setw(37) << left << "" << "\t[7] Manage Users.                     (X)\n";
             
 
 
 
+            CurrentUser._HasPermission(ClsUser::enPermissons::currency_menu) ?
+                cout << setw(37) << left << "" << "\t[8] Currency.\n" :
+                cout << setw(37) << left << "" << "\t[8] Currency.                         (X)\n";
+
+
+
+
             CurrentUser._HasPermission(ClsUser::enPermissons::clear_all_Client) ?
-                cout << setw(37) << left << "" << "\t[8] Clear.\n" :
-                cout << setw(37) << left << "" << "\t[8] Clear.                           (X)\n";
+                cout << setw(37) << left << "" << "\t[9] Clear.\n" :
+                cout << setw(37) << left << "" << "\t[9] Clear.                            (X)\n";
 
 
 
 
 
             CurrentUser._HasPermission(ClsUser::enPermissons::logout)?
-                cout << setw(37) << left << "" << "\t[9] Logout.\n":
-                cout << setw(37) << left << "" << "\t[9] Logout.                         (X)\n";
+                cout << setw(37) << left << "" << "\t[10] Logout.\n":
+                cout << setw(37) << left << "" << "\t[10] Logout.                           (X)\n";
             
 
             cout << setw(37) << left << "" << "===========================================\n";

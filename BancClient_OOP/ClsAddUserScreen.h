@@ -81,6 +81,9 @@ private:
 			cout << "Mange Users ?      [y/n]         : ";
 			_GivePermission(User, ClsUser::enPermissons::mange_users);
 
+			cout << "Curreny Menu?      [y/n]         : ";
+			_GivePermission(User, ClsUser::enPermissons::currency_menu);
+
 
 			cout << "Clear All Clients? [y/n]         : ";
 			_GivePermission(User, ClsUser::enPermissons::clear_all_Client);
