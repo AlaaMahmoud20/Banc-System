@@ -18,6 +18,11 @@ private:
 
 	_eMode _Mode;
 
+	bool IsEmpty()
+	{
+		return (_Mode == _eMode::Empty);
+	}
+
 
 
 	static ClsCurrency _CurrencyDataToObject(string line, string Seperator = "#//#")
@@ -77,7 +82,7 @@ private:
 		vector<ClsCurrency>_vCurrences = _LoadDataFromFile();
 		for (auto& C : _vCurrences)
 		{
-			if (C._CurrencyName == GetCurrencyName())
+			if (C._CurrencyCode == GetCurrencyCode())
 			{
 				C = *this;
 				break;
@@ -92,16 +97,16 @@ public:
 
 	ClsCurrency(_eMode Mode, string Country, string CurrencyCode, string CurrencyName, float Rate)
 	{
-		
+		_Mode = Mode;
 		_Country = Country;
 		_CurrencyCode = CurrencyCode;
 		_CurrencyName = CurrencyName;
 		_Rate = Rate;
 	}
-
-	static ClsCurrency Find(string CurrencyCode)
+	static ClsCurrency FindByCurrencyCode(string CurrencyCode)
 	{
-		ifstream file("UF");
+		CurrencyCode = clsString::UpperAllString(CurrencyCode);
+		ifstream file("Currencies.txt");
 		if (file.is_open())
 		{
 			string line;
@@ -109,7 +114,31 @@ public:
 			{
 				ClsCurrency C = _CurrencyDataToObject(line);
 
-				if (C.GetCurrencyCode() == CurrencyCode)
+				if (clsString::UpperAllString(C.GetCurrencyCode()) == CurrencyCode)
+				{
+					file.close();
+					return C;
+				}
+
+			}
+
+		}
+		return _EmptyObject();
+
+	}
+
+	static ClsCurrency FindByCountry(string Country)
+	{
+		Country = clsString::UpperAllString(Country);
+		ifstream file("Currencies.txt");
+		if (file.is_open())
+		{
+			string line;
+			while (getline(file, line))
+			{
+				ClsCurrency C = _CurrencyDataToObject(line);
+
+				if (clsString::UpperAllString(C.GetCountry()) == Country)
 				{
 					file.close();
 					return C;
@@ -137,6 +166,7 @@ public:
 	void SetCurrencyRate(float Rate)
 	{
 		_Rate = Rate;
+		//_Update();
 	}
 	float GetCurrencyRate()
 	{
@@ -165,32 +195,43 @@ public:
 			return enSaveDataInFile::UpdatedDataSavedSuccessfuly;
 			break;
 
+	//	/*case _enMode::AddNewMode:
+	//	{
+	//		_AddNew();
+	//		_SetMode(_enMode::UpdateMode);
+	//		return enSaveDataInFile::NewDataSavedSuccessfuly;
+	//	}
+	//	case _enMode::DeleteMode:
+	//	{
+	//		if (UserCanBeDeleted())
+	//		{
+	//			_Delete();
+	//			_SetMode(_enMode::UpdateMode);
+
+	//			return enSaveDataInFile::DataDeletedSuccessfuly;
+	//		}
+	//		else
+	//		{
+	//			_SetMode(_enMode::UpdateMode);
+	//			return enSaveDataInFile::Faild;
+	//		}*/
 		}
-		/*case _enMode::AddNewMode:
+		}
+	}
+
+
+	
+		static bool SearchByCountry(string Counrty)
 		{
-			_AddNew();
-			_SetMode(_enMode::UpdateMode);
-			return enSaveDataInFile::NewDataSavedSuccessfuly;
+			ClsCurrency C = FindByCountry(Counrty);
+			return !C.IsEmpty();
 		}
-		case _enMode::DeleteMode:
+		static bool SearchByCurrencyCode(string CurrencyCode)
 		{
-			if (UserCanBeDeleted())
-			{
-				_Delete();
-				_SetMode(_enMode::UpdateMode);
-
-				return enSaveDataInFile::DataDeletedSuccessfuly;
-			}
-			else
-			{
-				_SetMode(_enMode::UpdateMode);
-				return enSaveDataInFile::Faild;
-			}*/
-
+			ClsCurrency C = FindByCurrencyCode(CurrencyCode);
+			return !C.IsEmpty();
 
 		}
-
-	};
 
 
 };

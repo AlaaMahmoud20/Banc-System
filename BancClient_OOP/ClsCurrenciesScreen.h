@@ -4,18 +4,20 @@
 #include <iomanip>
 #include "clsInputValidation.h"
 #include "ClsCurrenciesList.h"
+#include"ClsUpdateCurrencyRateScreen.h"
+
 
 class ClsCurrenciesScreen:protected clsScreen
 {
 private:
     enum enCurrencyMenueOptions {
-        eCurrenciesList = 1, eBcak = 2
+        eCurrenciesList = 1, eUpdatRate=2,eBcak = 3
     };
 
     static short _ReadCurrencyMenueOption()
     {
         cout << setw(37) << left << "" << "Choose what do you want to do?: ";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 2, "Enter Number between 1 to 4? ");
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 3, "Enter Number between 1 to 4? ");
         return Choice;
     }
     static void _GoBackToCurrencyMenue()
@@ -30,6 +32,11 @@ private:
     {
         ClsCurrenciesList::CurrencesListScreen();
     }
+    static void _ShowUpdateCurrencyRateScreen()
+    {
+        ClsUpdateCurrencyRateScreen::UpdateCurrencyRateScreen();
+    }
+
 
 
     static void _PerformCurrencyMenueOption(enCurrencyMenueOptions CurrencyMenuOptions)
@@ -40,6 +47,13 @@ private:
             {
                 system("cls");
                 _ShowCurrenciesListScreen();
+                _GoBackToCurrencyMenue();
+                break;
+            }
+            case enCurrencyMenueOptions::eUpdatRate:
+            {
+                system("cls");
+                _ShowUpdateCurrencyRateScreen();
                 _GoBackToCurrencyMenue();
                 break;
             }
@@ -103,7 +117,8 @@ public:
         cout << setw(37) << left << "" << "\t\t  Currency Menue\n";
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t[1] Currencies List.\n";
-        cout << setw(37) << left << "" << "\t[2] Back.\n";
+        cout << setw(37) << left << "" << "\t[2] Update Rate.\n";
+        cout << setw(37) << left << "" << "\t[3] Back.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 
         _PerformCurrencyMenueOption((enCurrencyMenueOptions)_ReadCurrencyMenueOption());

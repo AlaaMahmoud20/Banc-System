@@ -7,6 +7,7 @@
 #include"ClsMainMenu.h"
 #include "ClsUser.h"
 #include "ClsLoginScreen.h"
+//#include "ClsCurrency.h"
 ClsUser ClsUser::_CurrentUser;
 
 

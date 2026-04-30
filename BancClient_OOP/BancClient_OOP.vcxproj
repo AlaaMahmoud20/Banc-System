@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClsCruencesList.cpp" />
     <ClCompile Include="ClsMainMenu.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -161,6 +160,8 @@
     <ClInclude Include="ClsTransferScreen.h" />
     <ClInclude Include="ClsUers.h" />
     <ClInclude Include="ClsUpdateClientScreen.h" />
+    <ClInclude Include="ClsUpdateCurrency.h" />
+    <ClInclude Include="ClsUpdateCurrencyRateScreen.h" />
     <ClInclude Include="ClsUpdateUserScreen.h" />
     <ClInclude Include="ClsUsersListScreen.h" />
     <ClInclude Include="ClsUtile.h" />
